@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+    <Avatar>
+    <AvatarImage src="https://github.com/shadcn.png" />
+    <AvatarFallback>CN</AvatarFallback>
+  </Avatar>
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
