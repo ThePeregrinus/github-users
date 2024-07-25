@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Input } from "@/components/ui/input"
 import { Github } from "lucide-react";
 
 interface TeamProps {
@@ -79,18 +80,17 @@ export const GithubUsers = () => {
   return (
     <section
       id="team"
-      className="container py-24 sm:py-32"
+      className="container py-16 sm:py-16"
     >
-      <h2 className="text-3xl md:text-4xl font-bold">
+      <h2 className="mb-3 text-3xl md:text-4xl font-bold">
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          Lorem Ipsum{" "}
+          Github Search{" "}
         </span>
         Users
       </h2>
-
+      <Input placeholder="Jonh Doe"/>
       <p className="mt-4 mb-10 text-xl text-muted-foreground">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
-        dolor pariatur sit!
+        <a href="https://docs.github.com/">GitHub REST API</a>
       </p>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 gap-y-10">
