@@ -26,7 +26,7 @@ export const User = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 gap-y-10">
             {(isLoading || isFetching) && <div>Loading...</div>}
             {isError ? <div>Error while fetching</div> : data?.map(
-            ({ owner, name, html_url, fork , id}) => (
+            ({ owner, name, html_url, fork, description , id}) => (
                 <Card
                 key={id}
                 className="bg-muted/50 mt-8 flex flex-col justify-center items-center"
@@ -44,6 +44,8 @@ export const User = () => {
                 </CardHeader>
 
                 <CardContent className="text-center pb-2">
+                    {description}
+                    <br/>
                     It's {fork ? 'fork' : 'not fork'}
                 </CardContent>
 
