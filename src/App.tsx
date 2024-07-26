@@ -1,4 +1,4 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import { GithubUsers } from "./components/GithubUsers"
 import { Navbar } from "./components/Navbar"

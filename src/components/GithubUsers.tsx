@@ -19,7 +19,7 @@ import { debounce } from "@/helpers/debounce";
 
 export const GithubUsers = () => {
   const [username, setUsername] = useState('');
-  const [per_page, setPerPage] = useState(8)
+  const [per_page] = useState(8)
   const [page, setPage] = useState(1);
 
   const useListUsersQuery = api.endpoints.listUsers.useQuery

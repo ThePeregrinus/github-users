@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -16,7 +17,7 @@ import {
 import { buttonVariants } from "./ui/button";
 import { Menu, Github, Users } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface RouteProps {
   href: string;
@@ -37,14 +38,7 @@ export const Navbar = () => {
       <NavigationMenu className="mx-auto">
         <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between ">
           <NavigationMenuItem className="font-bold flex">
-            <a
-              rel="noreferrer noopener"
-              href="/"
-              className="ml-2 font-bold text-xl flex"
-            >
-              <Users/>
-              Github Users
-            </a>
+            <Link className="ml-2 font-bold text-xl flex" to='/'><Users/> Users</Link>
           </NavigationMenuItem>
 
           {/* mobile */}

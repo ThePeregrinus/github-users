@@ -24,11 +24,11 @@ export const User = () => {
         profile
       </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 gap-y-10">
-            {isLoading && <div>Loading...</div>}
+            {(isLoading || isFetching) && <div>Loading...</div>}
             {isError ? <div>Error while fetching</div> : data?.map(
-            ({ owner, name, login,  html_url , fork}) => (
+            ({ owner, name, html_url, fork , id}) => (
                 <Card
-                key={login}
+                key={id}
                 className="bg-muted/50 mt-8 flex flex-col justify-center items-center"
                 >
                 <CardHeader className="mt-8 flex justify-center items-center pb-2">
