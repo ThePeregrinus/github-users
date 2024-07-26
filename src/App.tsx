@@ -1,6 +1,11 @@
+import { Routes, Route, Link } from "react-router-dom";
+
 import { GithubUsers } from "./components/GithubUsers"
 import { Navbar } from "./components/Navbar"
+import { User } from "./components/User";
+
 import './index.css'
+
 
 function App() {
 
@@ -8,7 +13,10 @@ function App() {
   return (
     <>
       <Navbar/>
-      <GithubUsers/>
+      <Routes>
+        <Route path="/" element={<GithubUsers/>}/>
+        <Route path="/user/:id" element={<User/>}/>
+      </Routes>
     </>
   )
 }

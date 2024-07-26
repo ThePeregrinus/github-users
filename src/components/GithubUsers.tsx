@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {useState } from "react";
+import { Link } from "react-router-dom";
 
 import { Button, buttonVariants } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -33,6 +35,7 @@ export const GithubUsers = () => {
 
   const handleSearch = debounce((value: string) => {
     setUsername(value)
+    setPage(1)
   }, 500);
 
   return (
@@ -73,7 +76,7 @@ export const GithubUsers = () => {
               </CardHeader>
 
               <CardContent className="text-center pb-2">
-                <p>{type}</p>
+                <Link to={`user/${login}`}> OPEN {login.toUpperCase()} PROFILE</Link>
               </CardContent>
 
               <CardFooter>
@@ -98,9 +101,9 @@ export const GithubUsers = () => {
         )}
       </div>
       <div className='flex mt-8 justify-center flex-row items-center gap-8'>
-        <Button onClick={()=>page !== 1 && setPage(page-1)} disabled={isLoading}> Previous Page </Button>
+        <Button onClick={()=>page !== 1 && setPage(page-1)} disabled={isLoading || isFetching}> Previous Page </Button>
         {page}
-        <Button onClick={()=>setPage(page+1)}  disabled={isLoading}> Next Page </Button>
+        <Button onClick={()=>setPage(page+1)}  disabled={isLoading || isFetching}> Next Page </Button>
       </div>
     </section>
   );
