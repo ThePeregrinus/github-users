@@ -1,13 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import './index.css'
+
 import { ThemeProvider } from './components/theme-provider.tsx'
+import { ApiProvider } from '@reduxjs/toolkit/query/react'
+import { api } from './services/list.ts'
+
+import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>,
+    <ApiProvider api={api}>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </ApiProvider>
 )

@@ -1,4 +1,6 @@
-import { buttonVariants } from "@/components/ui/button";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,68 +10,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input"
+import { api } from "@/services/list";
 import { Github } from "lucide-react";
 
-interface TeamProps {
-  imageUrl: string;
-  name: string;
-  position: string;
-  socialNetworks: SociaNetworkslProps[];
-}
-
-interface SociaNetworkslProps {
-  name: string;
-  url: string;
-}
-
-const teamList: TeamProps[] = [
-  {
-    imageUrl: "https://i.pravatar.cc/150?img=1",
-    name: "Emma Smith",
-    position: "Fullstack developer",
-    socialNetworks: [
-      {
-        name:'Github',
-        url: "https://github.com/"
-      }
-    ],
-  },
-  {
-    imageUrl: "https://i.pravatar.cc/150?img=2",
-    name: "John Doe",
-    position: "Tech Lead",
-    socialNetworks: [
-      {
-        name:'Github',
-        url: "https://github.com/"
-      }
-    ],
-  },
-  {
-    imageUrl: "https://i.pravatar.cc/150?img=3",
-    name: "Roman Zazin",
-    position: "Envelope Developer",
-    socialNetworks: [
-      {
-        name:'Github',
-        url: "https://github.com/"
-      }
-    ],
-  },
-  {
-    imageUrl: "https://i.pravatar.cc/150?img=5",
-    name: "Artem F",
-    position: "React Developer",
-    socialNetworks: [
-      {
-        name:'Github',
-        url: "https://github.com/"
-      }
-    ],
-  },
-];
+import { debounce } from "@/helpers/debounce";
 
 export const GithubUsers = () => {
+  const [username, setUsername] = useState('');
+  const [per_page, setPerPage] = useState(8)
+  const [page, setPage] = useState(1);
+
+  const useListUsersQuery = api.endpoints.listUsers.useQuery
+  const {data, isLoading, isFetching, isError } = useListUsersQuery({username, page, per_page})
+  const usersList = data?.items
+
   const socialIcon = (iconName: string) => {
     switch (iconName) {
       case "Github":
@@ -77,66 +31,76 @@ export const GithubUsers = () => {
     }
   };
 
+  const handleSearch = debounce((value: string) => {
+    setUsername(value)
+  }, 500);
+
   return (
     <section
-      id="team"
+      id="users"
       className="container py-16 sm:py-16"
     >
       <h2 className="mb-3 text-3xl md:text-4xl font-bold">
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
           Github Search{" "}
         </span>
-        Users
+         {data?.total_count} Users found
       </h2>
-      <Input placeholder="Jonh Doe"/>
+      <Input onChange={(e)=>{handleSearch(e.target.value)}} className='bg-muted/50' placeholder="Jonh Doe"/>
       <p className="mt-4 mb-10 text-xl text-muted-foreground">
         <a href="https://docs.github.com/">GitHub REST API</a>
       </p>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 gap-y-10">
-        {teamList.map(
-          ({ imageUrl, name, position, socialNetworks }: TeamProps) => (
+        {isLoading && <div>Loading...</div>}
+        {isError ? <div>Error while fetching</div> :
+        usersList?.map(
+          ({ avatar_url, login, type, html_url }) => (
             <Card
-              key={name}
+              key={login}
               className="bg-muted/50 mt-8 flex flex-col justify-center items-center"
             >
               <CardHeader className="mt-8 flex justify-center items-center pb-2">
                 <img
-                  src={imageUrl}
-                  alt={`${name} ${position}`}
+                  src={avatar_url}
+                  alt={`${login} ${type}`}
                   className="rounded-full w-24 h-24 aspect-square object-cover"
                 />
-                <CardTitle className="text-center">{name}</CardTitle>
+                <CardTitle className="text-center">{login}</CardTitle>
                 <CardDescription className="text-primary">
-                  {position}
+                  {type}
                 </CardDescription>
               </CardHeader>
 
               <CardContent className="text-center pb-2">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p>{type}</p>
               </CardContent>
 
               <CardFooter>
-                {socialNetworks.map(({ name, url }: SociaNetworkslProps) => (
-                  <div key={name}>
+                {
+                  <div>
                     <a
                       rel="noreferrer noopener"
-                      href={url}
+                      href={html_url}
                       target="_blank"
                       className={buttonVariants({
                         variant: "ghost",
                         size: "sm",
                       })}
                     >
-                      <span className="sr-only">{name} icon</span>
-                      {socialIcon(name)}
+                      <span className="sr-only">Github icon</span>
+                      {socialIcon('Github')}
                     </a>
-                  </div>
-                ))}
+                  </div>}
               </CardFooter>
             </Card>
           )
         )}
+      </div>
+      <div className='flex mt-8 justify-center flex-row items-center gap-8'>
+        <Button onClick={()=>page !== 1 && setPage(page-1)} disabled={isLoading}> Previous Page </Button>
+        {page}
+        <Button onClick={()=>setPage(page+1)}  disabled={isLoading}> Next Page </Button>
       </div>
     </section>
   );
