@@ -24,7 +24,8 @@ export const User = () => {
         profile
       </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 gap-y-10">
-            {data?.map(
+            {isLoading && <div>Loading...</div>}
+            {isError ? <div>Error while fetching</div> : data?.map(
             ({ owner, name, login,  html_url , fork}) => (
                 <Card
                 key={login}
@@ -36,7 +37,7 @@ export const User = () => {
                     alt={`${name} `}
                     className="rounded-full w-24 h-24 aspect-square object-cover"
                     />
-                    <CardTitle className="text-center">{name}</CardTitle>
+                    <CardTitle className="text-center">{name.length > 15 ? name.slice(0,15) : name}</CardTitle>
                     <CardDescription className="text-primary">
                     {name}
                     </CardDescription>
