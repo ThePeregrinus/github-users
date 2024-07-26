@@ -9,7 +9,7 @@ export function debounce<
   let timer: number | null = null ;
   return (...args: T) => {
     if (timer) clearTimeout(timer);
-    timer = setTimeout(() => {
+    timer = window.setTimeout(() => {
       func.call(null, ...args);
     }, delay);
   };
