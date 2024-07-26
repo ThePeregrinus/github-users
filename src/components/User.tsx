@@ -29,7 +29,7 @@ export const User = () => {
             ({ owner, name, html_url, fork, description , id}) => (
                 <Card
                 key={id}
-                className="bg-muted/50 mt-8 flex flex-col justify-center items-center"
+                className="overflow-hidden bg-muted/50 mt-8 flex flex-col justify-center items-center"
                 >
                 <CardHeader className="mt-8 flex justify-center items-center pb-2">
                     <img
