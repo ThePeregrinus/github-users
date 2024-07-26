@@ -2,8 +2,8 @@
 
 This project allows you to search github users and their repos via [GitHub REST API](https://docs.github.com/en/rest)
 
-![image info](./src/assets/project.png)
-![image info](./src/assets/project1.png)
+![image info](/blob/master/assets/project.png)
+![image info](/blob/master/assets/project1.png)
 
 ## Features
 1. Night theme 🌙

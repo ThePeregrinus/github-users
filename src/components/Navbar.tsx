@@ -25,13 +25,12 @@ interface RouteProps {
 
 const routeList: RouteProps[] = [
   {
-    href: "https://github.com/ThePeregrinus/github-users/blob/main/README.md",
+    href: "https://github.com/ThePeregrinus/github-users/blob/master/README.md",
     label: "FAQ",
   },
 ];
 
 export const Navbar = () => {
-  const { id } = useParams()
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
