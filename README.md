@@ -2,9 +2,6 @@
 
 This project allows you to search github users and their repos via [GitHub REST API](https://docs.github.com/en/rest)
 
-![image info](/blob/master/assets/project.png)
-![image info](/blob/master/assets/project1.png)
-
 ## Features
 1. Night theme 🌙
 2. Debounce input ⏲️
