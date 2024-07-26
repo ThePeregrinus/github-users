@@ -5,6 +5,7 @@ import { Navbar } from "./components/Navbar"
 import { User } from "./components/User";
 
 import './index.css'
+import { Scroll } from "./components/Scroll";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<GithubUsers/>}/>
         <Route path="/user/:id" element={<User/>}/>
       </Routes>
+      <Scroll/>
     </>
   )
 }

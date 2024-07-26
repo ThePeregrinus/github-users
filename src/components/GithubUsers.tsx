@@ -69,14 +69,14 @@ export const GithubUsers = () => {
                   alt={`${login} ${type}`}
                   className="rounded-full w-24 h-24 aspect-square object-cover"
                 />
-                <CardTitle className="text-center">{login}</CardTitle>
+                <CardTitle className="text-center">{login.length > 15 ? login.slice(0,15) : login}</CardTitle>
                 <CardDescription className="text-primary">
-                  {type}
+                  {type}login
                 </CardDescription>
               </CardHeader>
 
               <CardContent className="text-center pb-2">
-                <Link to={`user/${login}`}> OPEN {login.toUpperCase()} PROFILE</Link>
+                <Link to={`user/${login}`}> <Button variant='link'>OPEN PROFILE </Button></Link>
               </CardContent>
 
               <CardFooter>

@@ -16,6 +16,7 @@ import {
 import { buttonVariants } from "./ui/button";
 import { Menu, Github, Users } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
+import { useParams } from "react-router-dom";
 
 interface RouteProps {
   href: string;
@@ -24,16 +25,13 @@ interface RouteProps {
 
 const routeList: RouteProps[] = [
   {
-    href: "#Auth",
-    label: "Auth",
-  },
-  {
     href: "https://github.com/ThePeregrinus/github-users/blob/main/README.md",
     label: "FAQ",
   },
 ];
 
 export const Navbar = () => {
+  const { id } = useParams()
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
